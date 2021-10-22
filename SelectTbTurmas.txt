@@ -1,0 +1,14 @@
+select tbt.N_IDTURMA as 'ID TURMA',
+       tbt.T_DSCTURMA as 'DESC TURMA',
+       tbt.N_MAXIMOALUNOS as 'MAX ALUNOS',
+       tbh.T_DSCHORARIO as 'HORARIO',
+       tbp.T_NOMEPROFESSOR as 'PROFESSOR',
+       CASE 
+           WHEN tbt.T_STATUS = 'A' THEN 'ATIVA'
+           WHEN tbt.T_STATUS = 'P' THEN 'PARALISADA'
+           WHEN tbt.T_STATUS = 'C' THEN 'CANCELADA'
+       END as 'STATUS'
+ from tb_turmas as tbt
+ inner join
+     tb_horarios as tbh on tbh.N_IDHORARIO = tbt.N_IDHORARIO,
+     tb_professores tbp on tbp.N_IDPROFESSOR = tbt.N_IDPROFESSOR
